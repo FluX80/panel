@@ -9,7 +9,7 @@ use App\Entity\Endpoint;
  * Class Youtube
  * @author Soner Sayakci <shyim@posteo.de>
  */
-class Youtube extends AbstractService
+class StreamMe extends AbstractService
 {
     /**
      * @return string
@@ -17,7 +17,7 @@ class Youtube extends AbstractService
      */
     public function getName(): string
     {
-        return 'Youtube';
+        return 'Stream.me';
     }
 
     /**
@@ -36,8 +36,11 @@ class Youtube extends AbstractService
     public function getServerList(): array
     {
         return [
-            'Live Streaming' => 'rtmp://a.rtmp.youtube.com/live2',
-            'Live Streaming (backup)' => 'rtmp://b.rtmp.youtube.com/live2'
+            'US, Central' => 'rtmp://uc-origin.stream.me/origin',
+            'US, East' => 'rtmp://ue-origin.stream.me/origin',
+            'US, West' => 'rtmp://uw-origin.stream.me/origin',
+            'Europe, West' => 'rtmp://ew-origin.stream.me/origin',
+            'Asia, East' => 'rtmp://ae-origin.stream.me/origin'
         ];
     }
 

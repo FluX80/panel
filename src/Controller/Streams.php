@@ -97,7 +97,7 @@ class Streams extends Controller
         }
 
         if (empty($requestBody['name']) || !$this->isValidString($requestBody['name'])) {
-            return new JsonResponse(['message' => 'Name is empty or contains illegal strings'], 500);
+            return new JsonResponse(['message' => 'Name is empty or contains illegal chars'], 500);
         }
 
         $stream->setUser($this->getUser());
@@ -317,6 +317,6 @@ class Streams extends Controller
      */
     private function isValidString(?string $string)
     {
-        return preg_match('/^[a-z|A-Z|a-z|A-Z|0-9|.|\-|_|\{|\}|\:|\/|=|&|?]+$/m', $string);
+        return preg_match('/^[A-Z|a-z|0-9|.|\-|_|\{|\}|\:|\/|=|&|?]+$/m', $string);
     }
 }

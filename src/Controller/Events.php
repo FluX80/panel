@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class Events
@@ -53,7 +54,7 @@ class Events extends Controller
             $manager->persist($stream);
             $manager->flush();
 
-            return new Response();
+            return new RedirectResponse('live');
         }
 
         return new Response('', 401);

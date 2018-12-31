@@ -55,6 +55,10 @@ class Register extends Controller
 
         $data = $request->request->all();
 
+        if (empty($data['username']) || !$this->isValidString($data['username'])) {
+            return new JsonResponse(['message' => 'Name is empty or contains illegal chars. Please use A-Z, a-z, 0-9, .-_'], 500);
+        }
+
         if ($this->repository->findOneBy(['username' => $data['username']])) {
             return new JsonResponse(['message' => 'Username is already taken'], 500);
         }
@@ -88,5 +92,15 @@ class Register extends Controller
     private function isRegistrationEnabled(): bool
     {
         return XmlUtils::phpize($this->container->getParameter('registrationEnabled'));
+    }
+
+    /**
+     * @param null|string $string
+     * @return false|int
+     * @author Soner Sayakci <shyim@posteo.de>
+     */
+    private function isValidString(?string $string)
+    {
+        return preg_match('/^[A-Z|a-z|0-9|.|\-|_]+$/m', $string);
     }
 }

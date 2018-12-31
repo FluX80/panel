@@ -5,8 +5,8 @@
                 <div class="col-md-12">
                     <h3>Setup</h3>
 
-                    <fg-input label="URL" v-model="stream.streamUrl" disabled="true"></fg-input>
-                    <fg-input label="Stream Key" v-model="stream.streamKey" disabled="true"></fg-input>
+                    <fg-input label="URL" v-model="stream.streamUrl" readonly="true"></fg-input>
+                    <fg-input label="Stream Key" v-model="stream.streamKey" readonly="true"></fg-input>
 
                     <div v-if="stats.active">
                         <h3>Stream Statistics</h3>

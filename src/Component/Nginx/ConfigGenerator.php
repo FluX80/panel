@@ -34,6 +34,7 @@ rtmp {
 }
 
 http {
+\taccess_log  /dev/null;
 \tserver {
 \t\tlisten 127.0.0.1:26765;
 \t\tlocation /stat {

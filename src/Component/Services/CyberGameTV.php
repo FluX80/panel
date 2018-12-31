@@ -9,7 +9,7 @@ use App\Entity\Endpoint;
  * Class Youtube
  * @author Soner Sayakci <shyim@posteo.de>
  */
-class Youtube extends AbstractService
+class CyberGameTV extends AbstractService
 {
     /**
      * @return string
@@ -17,7 +17,7 @@ class Youtube extends AbstractService
      */
     public function getName(): string
     {
-        return 'Youtube';
+        return 'CyberGame.TV';
     }
 
     /**
@@ -36,8 +36,8 @@ class Youtube extends AbstractService
     public function getServerList(): array
     {
         return [
-            'Live Streaming' => 'rtmp://a.rtmp.youtube.com/live2',
-            'Live Streaming (backup)' => 'rtmp://b.rtmp.youtube.com/live2'
+            'RU Origin' => 'rtmp://st.cybergame.tv:1953/live',
+            'RU Premium' => 'rtmp://premium.cybergame.tv:1953/premium'
         ];
     }
 
