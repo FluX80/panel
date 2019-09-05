@@ -19,27 +19,52 @@ class ConfigGenerator
 %s
 \t\t}";
 
-    private const NGINX_CONF = "worker_processes  1;
+    private const NGINX_CONF = "user nginx;
+worker_processes 2;
 pid /run/nginx-rtmp.pid;
+error_log logs/error.log;
 
 events {
-\tworker_connections  1024;
+\tworker_connections 1024;
 }
 
 rtmp {
 \tserver {
 \t\tlisten 1935;
-%s
 \t}
 }
 
 http {
-\taccess_log  /dev/null;
+\taccess_log logs/access.log;
+\tinclude mime.types;
+
 \tserver {
-\t\tlisten 127.0.0.1:26765;
+\t\tlisten 26765;
 \t\tlocation /stat {
 \t\t\trtmp_stat all;
 \t\t}
+\t}
+
+\tserver {
+\t\tlisten 80;
+
+\t\troot /opt/panel/public;
+
+\t\tlocation / {
+\t\t\ttry_files chr(36)uri /index.phpchr(36)is_argschr(36)args;
+\t\t}
+
+\t\tlocation ~ ^/index\.php(/|chr(36)) {
+\t\t\tfastcgi_pass 127.0.0.1:9000;
+\t\t\t\tfastcgi_split_path_info ^(.+\.php)(/.*)chr(36);
+\t\t\t\tinclude fastcgi_params;
+\t\t\t\tfastcgi_param SCRIPT_FILENAME chr(36)realpath_rootchr(36)fastcgi_script_name;
+\t\t\t\tfastcgi_param DOCUMENT_ROOT chr(36)realpath_root;
+\t\t\t\tinternal;
+\t\t\t}
+\t\tlocation ~ \.phpchr(36) {
+\t\t\treturn 404;
+\t\t}\t\t
 \t}
 }
 ";
